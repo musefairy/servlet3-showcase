@@ -15,6 +15,8 @@ import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
 /**
+ * ServletContainerInitializer 先于 ServletContextListener 被调用
+ *
  * <p>User: Zhang Kaitao
  * <p>Date: 13-6-21 下午4:02
  * <p>Version: 1.0
@@ -24,9 +26,11 @@ public class DynamicInitListener implements ServletContextListener {
     @Override
     public void contextInitialized(final ServletContextEvent sce) {
         ServletContext sc = sce.getServletContext();
+        System.out.println("DynamicInitListener contextInitialized");
 
-        sc.addListener("com.sishuok.chapter2.web.listener.DynamicServletContextListener");
-
+        // 不能在 ServletContextListener 加载中再另外加载其他 ServletContextListener
+        // sc.addListener("com.sishuok.chapter2.web.listener.DynamicServletContextListener");
+        //
         sc.addFilter("dynamicFilter", DynamicFilter.class);
 
         ServletRegistration.Dynamic dynamic1 = sc.addServlet("dynamicServlet1", DynamicServlet.class);
@@ -43,5 +47,6 @@ public class DynamicInitListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(final ServletContextEvent sce) {
+        System.out.println("DynamicInitListener contextDestroyed");
     }
 }
