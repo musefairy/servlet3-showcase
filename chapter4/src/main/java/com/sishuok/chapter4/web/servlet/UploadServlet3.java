@@ -33,7 +33,7 @@ public class UploadServlet3 extends HttpServlet {
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         Part part = req.getPart("file1");
         InputStream is = part.getInputStream();
-        System.out.println(IOUtils.toString(is));
+        // System.out.println(IOUtils.toString(is));
         is.close();
 
         /**

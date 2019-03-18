@@ -51,7 +51,8 @@ public class ApiServlet extends HttpServlet {
         System.out.println(sessionCookieConfig.getName());
 
         //把默认的JSESSIONID--修改为->id   可以观察客户端变成了id
-        sessionCookieConfig.setName("id");
+        //Property name can not be added to SessionCookieConfig for context /chapter4 as the context has been initialised
+        // sessionCookieConfig.setName("id");
 
         //得到请求的session id
         req.getRequestedSessionId();
